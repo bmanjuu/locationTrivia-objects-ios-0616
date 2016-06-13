@@ -70,11 +70,15 @@
 -(FISTrivium *)triviumWithMostLikes{
     
     if([self.trivia count] > 0){
+        
         NSSortDescriptor *getMostLikes = [[NSSortDescriptor alloc] initWithKey:@"likes" ascending:NO];
         [self.trivia sortUsingDescriptors:@[getMostLikes]];
+        
         //get everything in descending order so the object with most likes is first
         return self.trivia[0];
     }
+    
+    //alternative method using for-in loops: 
     
     return nil;
 }

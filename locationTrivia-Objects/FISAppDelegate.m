@@ -25,9 +25,11 @@
 -(FISLocation *)locationNamed:(NSString *)name{
     
     for(FISLocation *location in self.locations){
+        
         if([location.name isEqualToString:name]){
             return location;
         }
+        
     }
     
     return nil;
@@ -39,12 +41,14 @@
     
     NSMutableArray *locationsWithinMargin = [[NSMutableArray alloc] init];
     
-    NSRange marginForRange = NSMakeRange(0, 25);
-    
     for(FISLocation *location in self.locations){
-        BOOL latitudeInRange = NSLocationInRange(location.latitude, marginForRange);
-        BOOL longitudeInRange = NSLocationInRange(location.longitude, marginForRange);
-        if(latitudeInRange && longitudeInRange){
+//        if((NSLocationInRange(location.latitude, NSMakeRange(latitude, margin))) || (NSLocationInRange(location.longitude, NSMakeRange(longitude, margin)))){
+//            [locationsWithinMargin addObject:location]; 
+//        }
+        NSLog(@"\n\n\n\n\n\n\n\n\n\n\nlatitude: %f", latitude);
+        NSLog(@"margin: %f", margin);
+        NSLog(@"latitude+margin: %f", latitude+margin);
+        if((location.latitude >= latitude+margin || location.latitude <= latitude-margin) && (location.longitude >= longitude+margin || location.longitude <= longitude-margin)){
             [locationsWithinMargin addObject:location];
         }
     }
