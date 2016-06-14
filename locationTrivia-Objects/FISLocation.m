@@ -78,8 +78,6 @@
         return self.trivia[0];
     }
     
-    //alternative method using for-in loops: 
-    
     return nil;
 }
 

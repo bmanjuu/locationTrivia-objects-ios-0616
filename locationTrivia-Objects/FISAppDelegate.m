@@ -41,18 +41,18 @@
     
     NSMutableArray *locationsWithinMargin = [[NSMutableArray alloc] init];
     
+    CGFloat latLowerLimit = latitude - margin;
+    CGFloat latUpperLimit = latitude + margin;
+    CGFloat longLowerLimit = longitude - margin;
+    CGFloat longUpperLimit = longitude + margin;
+    
     for(FISLocation *location in self.locations){
-//        if((NSLocationInRange(location.latitude, NSMakeRange(latitude, margin))) || (NSLocationInRange(location.longitude, NSMakeRange(longitude, margin)))){
-//            [locationsWithinMargin addObject:location]; 
-//        }
-        NSLog(@"\n\n\n\n\n\n\n\n\n\n\nlatitude: %f", latitude);
-        NSLog(@"margin: %f", margin);
-        NSLog(@"latitude+margin: %f", latitude+margin);
-        if((location.latitude >= latitude+margin || location.latitude <= latitude-margin) && (location.longitude >= longitude+margin || location.longitude <= longitude-margin)){
+        // everything nested within the if()-statement is connected by an && because if it is within the margin, it is both greater than or equal to the lower limit AND less than or equal to the upper limit. 
+        if(location.latitude >= latLowerLimit && location.latitude <= latUpperLimit && location.longitude >= longLowerLimit && location.longitude <= longUpperLimit){
             [locationsWithinMargin addObject:location];
         }
     }
-    
+
     return locationsWithinMargin;
 }
 
